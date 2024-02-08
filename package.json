@@ -4,7 +4,7 @@
 	"description": "owa-books backend",
 	"main": "index.js",
 	"engines": {
-		"node": "20.x"
+		"node": "18.x"
 	},
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
@@ -12,6 +12,7 @@
 	"author": "shokhruz",
 	"license": "ISC",
 	"dependencies": {
+		"@vercel/node": "^3.0.17",
 		"cors": "^2.8.5",
 		"express": "^4.18.2",
 		"joi": "^17.12.1",
