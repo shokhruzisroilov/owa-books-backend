@@ -255,7 +255,7 @@ route.delete('/:bookId', (req, res) => {
 function validateBook(book) {
 	const bookSchema = Joi.object({
 		title: Joi.string().required().min(5).max(50),
-		description: Joi.string().required().min(20).max(300),
+		description: Joi.string().required().min(20),
 		author: Joi.string().required().min(3).max(50),
 		aboutAuthor: Joi.string().required().min(10).max(200),
 		createdAt: Joi.number().required(),
