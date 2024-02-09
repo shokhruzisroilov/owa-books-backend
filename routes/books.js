@@ -1,10 +1,11 @@
 const express = require('express')
 const Joi = require('joi')
 const route = express.Router()
+const { v4: uuidv4 } = require('uuid')
 
 const books = [
 	{
-		id: 1,
+		id: uuidv4(),
 		title: 'Don’t make me think',
 		description:
 			"Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design.",
@@ -14,13 +15,13 @@ const books = [
 		createdAt: 2000,
 		rate: 3,
 		img: 'https://owabooks.netlify.app/img/make-me-think.png',
-		like: true,
+		like: false,
 		editionNumber: 'First Edition',
 		curentlyReading: 13,
 		haveRead: 250,
 	},
 	{
-		id: 2,
+		id: uuidv4(),
 		title: 'The Design of Everyday things',
 		description:
 			"Don Norman is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design.",
@@ -30,13 +31,13 @@ const books = [
 		createdAt: 1988,
 		rate: 3,
 		img: 'https://owabooks.netlify.app/img/design-everyday.png',
-		like: true,
+		like: false,
 		editionNumber: 'Second Edition',
 		curentlyReading: 25,
 		haveRead: 133,
 	},
 	{
-		id: 3,
+		id: uuidv4(),
 		title: 'Rich Dad Poor Dad',
 		description:
 			"Robert Kiyosaki is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design.",
@@ -52,7 +53,7 @@ const books = [
 		haveRead: 156,
 	},
 	{
-		id: 4,
+		id: uuidv4(),
 		title: 'Sprint : Solve Big Problems',
 		description:
 			"Robert Kiyosaki is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design",
@@ -68,7 +69,7 @@ const books = [
 		haveRead: 165,
 	},
 	{
-		id: 5,
+		id: uuidv4(),
 		title: 'Learn UX : Design Great Products',
 		description:
 			"Jeff Gothelf is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design",
@@ -84,7 +85,7 @@ const books = [
 		haveRead: 285,
 	},
 	{
-		id: 6,
+		id: uuidv4(),
 		title: 'The Road to React',
 		description:
 			"Robin Wieruch is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design",
@@ -100,7 +101,7 @@ const books = [
 		haveRead: 285,
 	},
 	{
-		id: 7,
+		id: uuidv4(),
 		title: 'Harry Potter and The Philosopher stone',
 		description:
 			"J. K. Rowling is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design",
@@ -116,7 +117,7 @@ const books = [
 		haveRead: 395,
 	},
 	{
-		id: 8,
+		id: uuidv4(),
 		title: 'You Don’t Know JS: Scope and Closure',
 		description:
 			"Kyle Simpson is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design",
@@ -132,7 +133,7 @@ const books = [
 		haveRead: 180,
 	},
 	{
-		id: 9,
+		id: uuidv4(),
 		title: 'Rocket Surgery Made Easy',
 		description:
 			"Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design",
@@ -148,7 +149,7 @@ const books = [
 		haveRead: 120,
 	},
 	{
-		id: 10,
+		id: uuidv4(),
 		title: 'The Practice of Creativity',
 		description:
 			"Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design. Steve Krug is a usability consultant who has more than 30 years of experience as a user advocate for companies like Apple, Netscape, AOL, Lexus, and others. Based in part on the success of his first book, Don't Make Me Think, he has become a highly sought-after speaker on usability design",
@@ -177,7 +178,7 @@ route.post('/', (req, res) => {
 		return res.status(400).send(error.details[0].message)
 	}
 	const book = {
-		id: books.length + 1,
+		id: uuidv4(),
 		title: req.body.title,
 		description: req.body.description,
 		author: req.body.author,
@@ -196,7 +197,7 @@ route.post('/', (req, res) => {
 
 // Get Book Id
 route.get('/:bookId', (req, res) => {
-	const book = books.find(b => b.id === parseInt(req.params.bookId))
+	const book = books.find(b => b.id === req.params.bookId)
 	if (!book) {
 		return res.status(404).send('Berilgan Idga teng kitob topilmadi')
 	} else {
@@ -206,7 +207,7 @@ route.get('/:bookId', (req, res) => {
 
 // Like Book
 route.get('/like/:bookId', (req, res) => {
-	const book = books.find(b => b.id === parseInt(req.params.bookId))
+	const book = books.find(b => b.id === req.params.bookId)
 	if (!book) {
 		return res.status(404).send('Tanlangan Idga teng kitob topilmadi')
 	} else {
@@ -221,7 +222,7 @@ route.put('/:bookId', (req, res) => {
 	if (error) {
 		return res.status(400).send(error.details[0].message)
 	}
-	const book = books.find(b => b.id === parseInt(req.params.bookId))
+	const book = books.find(b => b.id === req.params.bookId)
 	if (!book) {
 		return res.status(404).send('Berilgan Idga teng kitob topilmadi')
 	}
@@ -242,7 +243,7 @@ route.put('/:bookId', (req, res) => {
 
 // Delete Book
 route.delete('/:bookId', (req, res) => {
-	const book = books.find(b => b.id === parseInt(req.params.bookId))
+	const book = books.find(b => b.id === req.params.bookId)
 	if (!book) {
 		return res.status(404).send('Berilgan IDga teng bolgan kitob topilmadi')
 	}
