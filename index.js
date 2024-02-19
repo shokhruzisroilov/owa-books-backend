@@ -1,12 +1,15 @@
+require('dotenv').config()
 const express = require('express')
+const cors = require('cors')
 const mongoose = require('mongoose')
 const booksRouter = require('./routes/books')
 
 const app = express()
 app.use(express.json())
+app.use(cors())
 
 mongoose
-	.connect('mongodb://localhost/owa-books')
+	.connect(process.env.MONGO_URI)
 	.then(() => {
 		console.log('MongoDBga ulanish hosil qilindi...')
 	})
