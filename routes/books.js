@@ -4,17 +4,6 @@ const OwaBooks = require('../models/Books')
 
 const router = express.Router()
 
-// Get All Books
-router.get('/', async (req, res) => {
-	try {
-		const books = await OwaBooks.find()
-		res.status(200).json(books)
-	} catch (error) {
-		console.log(error.message)
-		res.status(500).send('Server Error')
-	}
-})
-
 // Create Book
 router.post('/', async (req, res) => {
 	const { error } = validateBook(req.body)
@@ -37,8 +26,89 @@ router.post('/', async (req, res) => {
 		const bookSave = await book.save()
 		res.status(201).send(bookSave)
 	} catch (error) {
-		console.log(error.message)
-		res.status(500).send('Server Error')
+		console.error(error)
+		res.status(500).json({ error: 'Server Error' })
+	}
+})
+
+// Get All Books
+router.get('/', async (req, res) => {
+	try {
+		const books = await OwaBooks.find().sort({ _id: -1 })
+		res.status(200).json(books)
+	} catch (error) {
+		console.error(error)
+		res.status(500).json({ error: 'Server Error' })
+	}
+})
+
+// One id book
+router.get('/:bookId', async (req, res) => {
+	try {
+		const book = await OwaBooks.findById(req.params.bookId)
+		if (!book) {
+			return res.status(404).send('No book found matching the given ID')
+		}
+		res.send(book)
+	} catch (error) {
+		console.error(error)
+		res.status(500).json({ error: 'Server Error' })
+	}
+})
+
+// Update Books
+router.put('/:bookId', async (req, res) => {
+	const { error } = validateBook(req.body)
+	if (error) {
+		return res.status(400).send(error.details[0].message)
+	}
+	try {
+		const book = await OwaBooks.findByIdAndUpdate(req.params.bookId, req.body, {
+			new: true,
+		})
+		if (!book) {
+			return res.status(404).send('No book found matching the given ID')
+		}
+		res.send(book)
+	} catch (error) {
+		console.error(error)
+		res.status(500).json({ error: 'Server Error' })
+	}
+})
+
+// Delete Books
+router.delete('/:bookId', async (req, res) => {
+	try {
+		const book = await OwaBooks.findByIdAndDelete(req.params.bookId)
+		if (!book) {
+			return res
+				.status(404)
+				.json({ error: 'No book found matching the given ID' })
+		}
+		res.json({ message: 'Book deleted successfully' })
+	} catch (error) {
+		console.error(error)
+		res.status(500).json({ error: 'Server Error' })
+	}
+})
+
+// Like Books
+router.put('/like/:bookId', async (req, res) => {
+	try {
+		const book = await OwaBooks.findByIdAndUpdate(
+			req.params.bookId,
+			{ $set: { like: true } },
+			{ new: true }
+		)
+		if (!book) {
+			return res
+				.status(404)
+				.json({ error: 'No book found matching the given ID' })
+		}
+		res.json(book)
+	} catch (error) {
+		console.error(error)
+		res.status(500).json({ error: 'Server Error' })
 	}
 })
 
