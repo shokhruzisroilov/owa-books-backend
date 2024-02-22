@@ -1,9 +1,11 @@
+// Import packages
 require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
-const booksRouter = require('./routes/books')
+const books = require('./routes/books')
 
+// Middlewares
 const app = express()
 app.use(express.json())
 app.use(cors())
@@ -17,14 +19,14 @@ mongoose
 		console.log("MongoDBga ulanishda xatolik ro'y berdi", error)
 	})
 
+// home
 app.get('/', (req, res) => {
 	res.send('Owa-books is runing')
 })
 
-app.use('/api/books', booksRouter)
+// Routes
+app.use('/api/books', books)
 
-const port = process.env.PORT || 3000
-
-app.listen(port, () => {
-	console.log(`Connect runing on port ${port}`)
-})
+// connection
+const port = process.env.PORT || 9001
+app.listen(port, () => console.log(`Listening to port ${port}`))

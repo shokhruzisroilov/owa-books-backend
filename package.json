@@ -1,7 +1,7 @@
 {
-	"name": "owa-books",
+	"name": "vercel-testing",
 	"version": "1.0.0",
-	"description": "owa-books backend",
+	"description": "node express testing",
 	"main": "index.js",
 	"engines": {
 		"node": "18.x"
@@ -10,17 +10,15 @@
 		"start": "node index.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
-	"author": "shokhruz",
+	"keywords": [],
+	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"@vercel/node": "^3.0.17",
 		"cors": "^2.8.5",
-		"dotenv": "^16.4.4",
+		"dotenv": "^16.4.5",
 		"express": "^4.18.2",
-		"joi": "^17.12.1",
-		"mongodb": "^6.3.0",
+		"joi": "^17.12.2",
 		"mongoose": "^8.1.3",
-		"nodemon": "^3.0.3",
-		"uuid": "^9.0.1"
+		"nodemon": "^3.0.1"
 	}
 }
