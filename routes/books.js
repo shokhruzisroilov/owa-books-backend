@@ -95,16 +95,16 @@ router.delete('/:bookId', async (req, res) => {
 // Like Books
 router.put('/like/:bookId', async (req, res) => {
 	try {
-		const book = await OwaBooks.findByIdAndUpdate(
-			req.params.bookId,
-			{ $set: { like: true } },
-			{ new: true }
-		)
+		const book = await OwaBooks.findById(req.params.bookId)
 		if (!book) {
 			return res
 				.status(404)
 				.json({ error: 'No book found matching the given ID' })
 		}
+		
+		book.like = !book.like
+		await book.save()
+
 		res.json(book)
 	} catch (error) {
 		console.error(error)

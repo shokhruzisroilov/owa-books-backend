@@ -4,11 +4,11 @@
 	"description": "owa-books backend",
 	"main": "index.js",
 	"engines": {
-		"node": "18.x"
+		"node": "14.x"
 	},
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "nodemon index.js"
+		"start": "node index.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"author": "shokhruz",
 	"license": "ISC",
