@@ -85,7 +85,7 @@ router.delete('/:bookId', async (req, res) => {
 				.status(404)
 				.json({ error: 'No book found matching the given ID' })
 		}
-		res.json({ message: 'Book deleted successfully' })
+		res.send(book)
 	} catch (error) {
 		console.error(error)
 		res.status(500).json({ error: 'Server Error' })
@@ -93,7 +93,7 @@ router.delete('/:bookId', async (req, res) => {
 })
 
 // Like Books
-router.put('/like/:bookId', async (req, res) => {
+router.get('/like/:bookId', async (req, res) => {
 	try {
 		const book = await OwaBooks.findById(req.params.bookId)
 		if (!book) {
@@ -101,11 +101,9 @@ router.put('/like/:bookId', async (req, res) => {
 				.status(404)
 				.json({ error: 'No book found matching the given ID' })
 		}
-		
 		book.like = !book.like
 		await book.save()
-
-		res.json(book)
+		res.send('Succes like')
 	} catch (error) {
 		console.error(error)
 		res.status(500).json({ error: 'Server Error' })
@@ -115,9 +113,9 @@ router.put('/like/:bookId', async (req, res) => {
 // Validate Book
 function validateBook(book) {
 	const bookSchema = Joi.object({
-		title: Joi.string().required(),
+		title: Joi.string().required().min(3).max(50),
 		description: Joi.string().required(),
-		author: Joi.string().required(),
+		author: Joi.string().required().min(2).max(15),
 		aboutAuthor: Joi.string().required(),
 		rate: Joi.number().integer().min(1).max(5).required(),
 		img: Joi.string().uri().required(),
